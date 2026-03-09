@@ -1,17 +1,20 @@
 import argparse
 
+import os
+
+os.environ["MUJOCO_GL"] = "egl"
 import mujoco
 
 from hydrax.algs import CEM, MPPI, PredictiveSampling
 from hydrax.simulation.deterministic import run_interactive
-from hydrax.tasks.cart_pole import CartPole
+from hydrax.tasks.adroit_door import AdroitDoor
 
 """
 Run an interactive simulation of a cart-pole swingup
 """
 
 # Define the task (cost and dynamics)
-task = CartPole()
+task = AdroitDoor()
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(
@@ -75,5 +78,6 @@ run_interactive(
     fixed_camera_id=0,
     show_traces=False,
     max_traces=1,
+    render=False,
     record_video=True,
 )
