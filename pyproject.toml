@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hydrax"
-version = "0.0.4"
+version = "0.0.5"
 description = "Sampling-based model predictive control on GPU with JAX/MJX"
 readme = "README.md"
 license = {text="MIT"}
@@ -21,8 +21,8 @@ dependencies = [
     "interpax>=0.3.7",
     "mediapy>=1.2.5",
     "minari[hdf5]>=0.5.3",
-    "mujoco>=3.2.4",
-    "mujoco-mjx>=3.2.4",
+    "mujoco>=3.5.0",
+    "mujoco-mjx>=3.5.0",
     "warp-lang>=1.10.1",
 ]
 
