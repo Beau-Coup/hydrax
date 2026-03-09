@@ -14,12 +14,11 @@ classifiers = [
     "Programming Language :: Python",
 ]
 dependencies = [
-    "evosax>=0.2.0",
+    "evosax>=0.1.6",
     "flax>=0.10.0",
     "gymnasium-robotics>=1.4.2",
     "huggingface_hub>=0.29.3",
     "interpax>=0.3.7",
-    "jax[cuda13]>=0.8.3",
     "mediapy>=1.2.5",
     "minari[hdf5]>=0.5.3",
     "mujoco>=3.2.4",
@@ -28,6 +27,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+cuda12 = [
+    "jax[cuda12]>=0.4.35",
+]
+cuda13 = [
+    "jax[cuda13]>=0.4.35",
+]
 dev = [
     "matplotlib>=3.9.2",
     "pre-commit>=4.0.1",
