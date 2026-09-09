@@ -22,7 +22,7 @@ def test_predictive_sampling() -> None:
     # Initialize the policy parameters
     params = opt.init_params()
     assert params.mean.shape == (opt.num_knots, 1)
-    assert isinstance(params.rng, jax._src.prng.PRNGKeyArray)
+    assert jax.dtypes.issubdtype(params.rng.dtype, jax.dtypes.prng_key)
 
     # Sample control sequences from the policy
     knots, new_params = opt.sample_knots(params)

@@ -11,7 +11,7 @@ from evosax.algorithms.distribution_based import (
     xNES,
 )
 
-from hydrax.algs import CEM, DIAL, MPPI, Evosax, PredictiveSampling
+from hydrax.algs import CEM, DAC, DIAL, MPPI, Evosax, PredictiveSampling
 from hydrax.risk import WorstCase
 from hydrax.simulation.deterministic import run_interactive
 from hydrax.tasks.particle import Particle
@@ -44,9 +44,11 @@ subparsers.add_parser("sa", help="Simulated Annealing")
 subparsers.add_parser("xnes", help="Exponential Natural Evolution Strategy")
 subparsers.add_parser("gld", help="Gradient-Less Descent")
 subparsers.add_parser("rs", help="Uniform Random Search")
+subparsers.add_parser("dac", help="Divide and conquer sampling")
 subparsers.add_parser(
     "dial", help="Diffusion-Inspired Annealing for Legged MPC (DIAL)"
 )
+subparsers.add_parser("")
 args = parser.parse_args()
 
 # Define the task (cost and dynamics)
@@ -57,7 +59,7 @@ if args.algorithm == "ps" or args.algorithm is None:
     print("Running predictive sampling")
     ctrl = PredictiveSampling(
         task,
-        num_samples=16,
+        num_samples=128,
         noise_level=0.1,
         num_randomizations=10,
         risk_strategy=WorstCase(),
@@ -176,6 +178,17 @@ elif args.algorithm == "dial":
         num_knots=11,
         iterations=5,
     )
+elif args.algorithm == "dac":
+    print("Running Divide and Conquer sampling")
+    ctrl = DAC(
+        task,
+        num_samples=1024,
+        noise_level=0.4,
+        temperature=1.0,
+        plan_horizon=1.5,
+        num_knots=21,
+    )
+
 else:
     parser.error("Invalid algorithm")
 

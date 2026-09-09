@@ -15,6 +15,7 @@ class HumanoidStandup(Task):
     def __init__(self, impl: str = "jax") -> None:
         """Load the MuJoCo model and set task parameters."""
         mj_model = mujoco.MjModel.from_xml_path(ROOT + "/models/g1/scene.xml")
+        mj_model.opt.timestep = 0.04
         super().__init__(
             mj_model,
             trace_sites=["imu_in_torso", "left_foot", "right_foot"],
@@ -82,4 +83,4 @@ class HumanoidStandup(Task):
 
     def make_data(self) -> mjx.Data:
         """Create a new state object with extra constraints allocated."""
-        return super().make_data(naconmax=20000, njmax=200)
+        return super().make_data(naconmax=10_000, njmax=1500)

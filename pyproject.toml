@@ -14,6 +14,7 @@ classifiers = [
     "Programming Language :: Python",
 ]
 dependencies = [
+    "blackjax>=1.2.0",
     "evosax>=0.1.6",
     "flax>=0.10.0",
     "gymnasium-robotics>=1.4.2",

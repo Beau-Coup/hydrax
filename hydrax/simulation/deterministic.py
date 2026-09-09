@@ -100,7 +100,9 @@ def run_interactive(  # noqa: PLR0912, PLR0915
 
     tq = jnp.arange(0, sim_steps_per_replan) * mj_model.opt.timestep
     tk = policy_params.tk
-    knots = policy_params.mean[None, ...]
+    knots = policy_params.mean[
+        None, ...
+    ]  # Is this really optimal? Should be max in general?
     _ = jit_interp_func(tq, tk, knots)
     _ = jit_interp_func(tq, tk, knots)
     print(f"Time to jit: {time.time() - st:.3f} seconds")
